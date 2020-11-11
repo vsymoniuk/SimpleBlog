@@ -4,8 +4,8 @@ import {
   FETCH_POST_ERROR,
   FETCH_POST_SUCCESS,
   SET_CURRENT_POST,
-} from "@_types/post";
-import { PostsReducerState } from "@_types/interfaces";
+} from "store/types/post";
+import { PostsReducerState } from "interfaces/interfaces";
 
 const initialState: PostsReducerState = {
   posts: [],

@@ -1,33 +1,43 @@
-import {Provider} from 'react-redux';
+import { Provider } from "react-redux";
 import withRedux from "next-redux-wrapper";
-import store from '../store/store';
+import withReduxSaga from "next-redux-saga";
+import makeStore from "../store/store";
 
-import { AppContext, AppInitialProps } from 'next/app';
-import { NextComponentType, NextPageContext } from 'next';
-import { AnyAction, CombinedState, Store } from 'redux';
+import { AppContext, AppInitialProps } from "next/app";
+import { NextComponentType, NextPageContext } from "next";
+import { AnyAction, CombinedState, Store } from "redux";
+import { RootState } from "../interfaces/interfaces";
+
+import Head from "next/head";
 
 interface MyAppInitialProps extends AppInitialProps {
-    Component: NextComponentType<NextPageContext, {}, {}>
-    store: Store<CombinedState<any>, AnyAction>
+  Component: NextComponentType<NextPageContext, {}, {}>;
+  store: Store<CombinedState<RootState>, AnyAction>;
 }
 
-const MyApp = ({Component, pageProps, store}: MyAppInitialProps): JSX.Element => {
-    return (
-        <Provider store={store}>
-            <Component {...pageProps}/>
-        </Provider>
-    )
-}
+const MyApp = ({
+  Component,
+  pageProps,
+  store,
+}: MyAppInitialProps): JSX.Element => {
+  return (
+    <Provider store={store}>
+      <Head>
+        <title>Simple Blog</title>
+      </Head>
+      <Component {...pageProps} />
+    </Provider>
+  );
+};
 
-MyApp.getInitialProps = async ({ctx,Component}:AppContext) => {
-    const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
+MyApp.getInitialProps = async ({ ctx, Component }: AppContext) => {
+  let pageProps = {};
 
-    //Anything returned here can be accessed by the client
-    return {pageProps};
-}
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
 
-//makeStore function that returns a new store for every request
-const makeStore = () => store;
+  return { pageProps };
+};
 
-//withRedux wrapper that passes the store to the App Component
-export default withRedux(makeStore)(MyApp);
+export default withRedux(makeStore)(withReduxSaga(MyApp));

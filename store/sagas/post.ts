@@ -1,10 +1,10 @@
-import { CreatePostAction, CREATE_POST } from "./../../types/post";
-import { IPost } from "@_types/interfaces";
+import { CreatePostAction, CREATE_POST } from "../types/post";
+import { IPost } from "interfaces/interfaces";
 import {
   FETCH_POSTS,
   FetchDetailedPostAction,
   FETCH_DETAILED_POST,
-} from "@_types/post";
+} from "store/types/post";
 import {
   fetchPostError,
   fetchPostStart,
@@ -17,10 +17,10 @@ import axios from "axios";
 function* fetchPosts() {
   try {
     yield put(fetchPostStart());
-    const {data: posts} = yield call(
+    const { data: posts } = yield call(
       axios.get,
       `${process.env.BASE_API_URL}/posts`
-    );    
+    );
 
     yield put(fetchPostSuccess(posts));
   } catch (error) {
@@ -35,7 +35,7 @@ function* watchFetchPosts() {
 function* fetchPostById(action: FetchDetailedPostAction) {
   try {
     yield put(fetchPostStart());
-    const post: IPost = yield call(
+    const { data: post } = yield call(
       axios.get,
       `${process.env.BASE_API_URL}/posts/${action.id}?_embed=comments`
     );

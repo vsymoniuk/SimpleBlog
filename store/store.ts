@@ -1,15 +1,42 @@
-import { applyMiddleware, compose, createStore } from "redux";
+import { applyMiddleware, createStore, Store } from "redux";
+import createSagaMiddleware, { Task } from "redux-saga";
+
 import rootReducer from "./reducers/rootReducer";
-import createSagaMiddleware from "redux-saga";
 import rootSaga from "./sagas/rootSaga";
 
-function configureStore() {
-  const sagaMiddleware = createSagaMiddleware();
-  const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+// const makeStore = (initState) => {
+//   const sagaMiddleware = createSagaMiddleware();
+//   const store = createStore(
+//     rootReducer,
+//     initState,
+//     applyMiddleware(sagaMiddleware)
+//   );
 
-  sagaMiddleware.run(rootSaga);
+//   sagaMiddleware.run(rootSaga);
+
+//   return store
+// };
+
+// export default makeStore;
+
+interface MyStore extends Store {
+  sagaTask: Task;
+}
+
+function makeStore(preloadedState, { isServer, req = null }) {
+  const sagaMiddleware = createSagaMiddleware();
+
+  const store = createStore(
+    rootReducer,
+    preloadedState,
+    applyMiddleware(sagaMiddleware)
+  ) as MyStore;
+
+  if (req || !isServer) {
+    store.sagaTask = sagaMiddleware.run(rootSaga);
+  }
 
   return store;
 }
 
-export default configureStore();
+export default makeStore;

@@ -1,4 +1,4 @@
-import { SET_CURRENT_POST } from './../../types/post';
+import { SET_CURRENT_POST } from "../types/post";
 import {
   FETCH_POSTS,
   FETCH_POST_START,
@@ -7,8 +7,8 @@ import {
   FETCH_POST_SUCCESS,
   FETCH_POST_ERROR,
   PostActionTypes,
-} from "@_types/post";
-import { IPost } from "@_types/interfaces";
+} from "store/types/post";
+import { IPost } from "interfaces/interfaces";
 
 export const createPost = (post: IPost): PostActionTypes => ({
   type: CREATE_POST,
@@ -16,9 +16,9 @@ export const createPost = (post: IPost): PostActionTypes => ({
 });
 
 export const setCurrentPost = (post: IPost): PostActionTypes => ({
-    type: SET_CURRENT_POST,
-    post,
-  });
+  type: SET_CURRENT_POST,
+  post,
+});
 
 export const fetchPosts = (): PostActionTypes => ({
   type: FETCH_POSTS,

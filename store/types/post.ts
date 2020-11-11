@@ -1,4 +1,4 @@
-import { IPost } from "./interfaces";
+import { IPost } from "../../interfaces/interfaces";
 
 export const FETCH_POSTS = "FETCH_POSTS";
 export const FETCH_DETAILED_POST = "FETCH_DETAILED_POST";

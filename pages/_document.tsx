@@ -5,7 +5,6 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          {/* <title>Simple Blog</title> */}
           <meta
             name="keywords"
             content="blog,simple blog,test assessment,front-end test assessment,DevelopsToday"
