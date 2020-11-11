@@ -20,6 +20,7 @@ export interface RootState  {
 export interface PostsReducerState {
     posts?: IPost[];
     currentPost?: IPost;
+    loading: boolean;
     error?: string;
 }
 

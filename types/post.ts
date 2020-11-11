@@ -8,9 +8,15 @@ export const FETCH_POST_ERROR = "FETCH_POST_ERROR";
 export const FETCH_POST_SUCCESS = "FETCH_POST_SUCCESS";
 
 export const CREATE_POST = "CREATE_POST";
+export const SET_CURRENT_POST = "SET_CURRENT_POST";
 
-interface CreatePostAction {
+export interface CreatePostAction {
   type: typeof CREATE_POST;
+  post: IPost;
+}
+
+interface SetCurrPostAction {
+  type: typeof SET_CURRENT_POST;
   post: IPost;
 }
 
@@ -18,7 +24,7 @@ interface FetchPostsAction {
   type: typeof FETCH_POSTS;
 }
 
-interface FetchDetailedPostAction {
+export interface FetchDetailedPostAction {
   type: typeof FETCH_DETAILED_POST;
   id: string;
 }
@@ -43,4 +49,5 @@ export type PostActionTypes =
   | FetchDetailedPostAction
   | FetchPostStartAction
   | FetchPostSuccessAction
-  | FetchPostErrorAction;
+  | FetchPostErrorAction
+  | SetCurrPostAction;
