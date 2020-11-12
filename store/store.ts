@@ -4,21 +4,6 @@ import createSagaMiddleware, { Task } from "redux-saga";
 import rootReducer from "./reducers/rootReducer";
 import rootSaga from "./sagas/rootSaga";
 
-// const makeStore = (initState) => {
-//   const sagaMiddleware = createSagaMiddleware();
-//   const store = createStore(
-//     rootReducer,
-//     initState,
-//     applyMiddleware(sagaMiddleware)
-//   );
-
-//   sagaMiddleware.run(rootSaga);
-
-//   return store
-// };
-
-// export default makeStore;
-
 interface MyStore extends Store {
   sagaTask: Task;
 }
