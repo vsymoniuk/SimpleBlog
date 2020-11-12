@@ -1,42 +1,10 @@
+import CreatePostForm from "components/CreatePostForm/CreatePostForm";
 import { IPost } from "interfaces/interfaces";
-import { useState } from "react";
 import { connect } from "react-redux";
 import { createPost } from "store/actions/post";
-import { useRouter } from "next/router";
 
 const CreatePostPage = ({ createPost }): JSX.Element => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const Router = useRouter();
-
-  const clickHandler = async () => {
-    await createPost({ body, title });
-    Router.push("/");
-  };
-
-  return (
-    <div>
-      <div>
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          type="text"
-          name="title"
-        />
-      </div>
-      <hr />
-      <div>
-        <textarea
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          name="body"
-          cols={30}
-          rows={10}
-        ></textarea>
-      </div>
-      <button onClick={clickHandler}>Save Post</button>
-    </div>
-  );
+  return <CreatePostForm createPost={createPost} />
 };
 
 const mapDispatchToProps = (dispatch: any) => ({

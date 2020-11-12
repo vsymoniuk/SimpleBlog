@@ -38,12 +38,14 @@ export default function PostList({ posts }: Props) {
 }
 
 const baseGrid = "8px";
-const colourBodyBackground = "#d84c6e";
-const colourBackground = "#fff";
-const colourBackgroundFolded = "#f5f5f5";
-const colourBackgroundStripes = "rgba(255,255,255,.5)";
+const colourBodyBackground = "#fefefe";
+const colourText = "#ccc";
+const colourBackground = "rgb(29, 34, 35)";
+const colourBackgroundFolded = "rgb(40, 47, 48)";
+const colourBackgroundStripes = "rgba(29, 34, 35, .5)";
 
 const Posts = styled.ol`
+  padding: 80px;
   margin: calc(${baseGrid} * 2) auto calc(${baseGrid} * 5);
   display: grid;
   grid-row-gap: calc(${baseGrid} * 8);
@@ -120,6 +122,7 @@ const PostLink = styled.a`
 
 const PostContent = styled.div`
   background-color: ${colourBackground};
+  color: ${colourText};
   position: absolute;
   top: 0;
   bottom: 0;
