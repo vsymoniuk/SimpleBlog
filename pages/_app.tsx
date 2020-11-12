@@ -9,6 +9,7 @@ import { AnyAction, CombinedState, Store } from "redux";
 import { RootState } from "../interfaces/interfaces";
 
 import Head from "next/head";
+import "../styles/main.css";
 
 interface MyAppInitialProps extends AppInitialProps {
   Component: NextComponentType<NextPageContext, {}, {}>;

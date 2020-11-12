@@ -22,6 +22,3 @@ export interface PostsReducerState {
   error: string | null;
 }
 
-export interface CommentReducerState {
-  comments: IComment[] | null;
-}
